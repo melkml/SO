@@ -90,42 +90,44 @@ do {
     return NULL;
 }
 
-void insert_page(int id) {
+void lru_insert_page(int id) {
     Page * page =  get_page_by_id(&list_page, id);
 
+    // Se existe page no cache
     if(page) {
         queue_remove((queue_t **) &list_page, (queue_t *) page);
         queue_append((queue_t **) &list_page, (queue_t *) page);
-    } else {
+    } 
+
+    //Se não existir page no cache.
+    if(!page) {
         int size = queue_size((queue_t *) list_page);
 
+        // Se cache tiver cheio, liberar memoria e remover ultima page usada do cache
         if(size == N) {
             int removido = list_page->id;
             free_page_mem(list_page->id);
             queue_remove((queue_t **) &list_page, (queue_t *) list_page);
-            printf("Page %d removida do cache.\n", removido);
+            printf("\033[31mPage\033[1m %d\033[0m\033[31m removida do cache.\033[0m\n", removido);
         }
 
         page = init_page(&item[0], id);
-
-        if(!page) {
-            return;
-        }
-
         queue_append((queue_t **) &list_page, (queue_t *) page);
     }
 
-    printf("Page %d usada. ", page->id);
+    // output
+    printf("\033[32mPage\033[1m %d\033[0m\033[32m usada.\033[0m ", page->id);
     queue_print("Cache:", (queue_t *) list_page, print_elem);
 }
+
 
 int main() {
     init_mem();
 
     while(true) {
         
-        insert_page(rand() % 10);
-         sleep(1);
+        lru_insert_page(rand() % 10);
+        //  sleep(1);
     
     }
    
