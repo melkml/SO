@@ -56,22 +56,6 @@ Page * init_page(Page * item, int pageId) {
      return NULL;
 }
 
-
-// bool check_in_list(Page ** list, int pageId) {
-//  bool isInQueue = false; 
-//  Page *aux = *list;
-
-//    while(aux->next != *list) {
-//       if(aux->id == pageId) {
-//             isInQueue = true;
-//         }
-//       aux = aux->next;
-//    }
-
-//     return isInQueue;
-// }
-
-
 Page * get_page_by_id(Page ** list, int pageId) {
 
 // FIla vazia
@@ -98,7 +82,7 @@ do {
       if(aux->id == pageId) {
             return aux;
         }
-        
+
       aux = aux->next;
       
    } while((aux != *list));
@@ -142,12 +126,6 @@ int main() {
         
         insert_page(rand() % 10);
          sleep(1);
-
-        // printf("Memoria: [ ");
-        // for (int i = 0; i < N; i++) {
-        //      printf("%d ", item[i].id);
-        // }
-        // printf("]\n");
     
     }
    
