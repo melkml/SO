@@ -30,7 +30,7 @@ int queue_size (queue_t *queue) {
 }
 
 void queue_print (char *name, queue_t *queue, void print_elem (void*)) {
-   printf("%s [", name);
+   printf("%s [ ", name);
     // Fila vazia
     if(!queue) {
         print_elem(queue);
